@@ -228,6 +228,13 @@
 						id="itensCarrinho"
 						class="row mr-0 ml-0 animated fadeIn hidden"
 					></div>
+					<div id="observacoesCarrinho"
+						class="row mr-0 ml-0 animated fadeIn hidden">
+							<div class="form-group col-12">
+								<label>Observações:</label>
+								<input id="txtobservacoesCarrinho" type="text" class="form-control" />
+						</div>
+					</div>
 
 					<div id="localEntrega" class="row mr-0 ml-0 animated fadeIn hidden">
 						<div class="col-12 col-lg-4 col-md-4 col-sm-12">
@@ -329,7 +336,17 @@
 						</div>
 
 						<div class="col-12">
-							<p class="title-carrinho mt-4">
+							<div class="row">
+								<p class="title-carrinho mt-4 mr-2">
+									<b>Observações:</b>
+								</p>
+								<p id="listaObservacoes" class="title-carrinho mt-4">
+								</p>
+							</div>
+						</div>
+
+						<div class="col-12">
+							<p class="title-carrinho mt-4 pr-2">
 								<b>Local da entrega:</b>
 							</p>
 						</div>

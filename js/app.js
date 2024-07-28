@@ -4,7 +4,7 @@ $(document).ready(function () {
 
 var cardapio = {};
 
-var HORARIO_ABERTURA_LOJA = 18;
+var HORARIO_ABERTURA_LOJA = 1;
 var HORARIO_FECHAMENTO_LOJA = 23;
 
 var MEU_CARRINHO = [];
@@ -16,12 +16,19 @@ var VALOR_ENTREGA = 0;
 
 var CELULAR_EMPRESA = '5599999999999';
 
+var OBSERVACAO;
+
 var open = false;
+
 // verificar se está aberto
 function checkIsOpen() {
 	const data = new Date();
 	const hora = data.getHours();
-	return hora >= HORARIO_ABERTURA_LOJA && hora < HORARIO_FECHAMENTO_LOJA;
+	const dia = data.getDay();
+	return (
+		hora >= HORARIO_ABERTURA_LOJA && hora < HORARIO_FECHAMENTO_LOJA
+		// && dia != 0
+	);
 }
 
 const spanItem = document.getElementById('date-span');
@@ -185,6 +192,7 @@ cardapio.metodos = {
 		if (etapa == 1) {
 			$('#lblTituloEtapa').text('Seu carrinho:');
 			$('#itensCarrinho').removeClass('hidden');
+			$('#observacoesCarrinho').removeClass('hidden');
 			$('#localEntrega').addClass('hidden');
 			$('#resumoCarrinho').addClass('hidden');
 
@@ -203,6 +211,7 @@ cardapio.metodos = {
 		if (etapa == 2) {
 			$('#lblTituloEtapa').text('Endereço de entrega:');
 			$('#itensCarrinho').addClass('hidden');
+			$('#observacoesCarrinho').addClass('hidden');
 			$('#localEntrega').removeClass('hidden');
 			$('#resumoCarrinho').addClass('hidden');
 
@@ -219,6 +228,7 @@ cardapio.metodos = {
 		if (etapa == 3) {
 			$('#lblTituloEtapa').text('Resumo do pedido:');
 			$('#itensCarrinho').addClass('hidden');
+			$('#observacoesCarrinho').addClass('hidden');
 			$('#localEntrega').addClass('hidden');
 			$('#resumoCarrinho').removeClass('hidden');
 
@@ -260,7 +270,6 @@ cardapio.metodos = {
 					.replace(/\${qntd}/g, e.qntd);
 
 				$('#itensCarrinho').append(temp);
-
 				// último item
 				if (i + 1 == MEU_CARRINHO.length) {
 					cardapio.metodos.carregarValores();
@@ -343,7 +352,7 @@ cardapio.metodos = {
 			cardapio.metodos.mensagem('Seu carrinho está vazio.');
 			return;
 		}
-
+		OBSERVACAO = $('#txtobservacoesCarrinho').val();
 		cardapio.metodos.carregarEtapa(2);
 	},
 
@@ -482,6 +491,8 @@ cardapio.metodos = {
 			$('#listaItensResumo').append(temp);
 		});
 
+		$('#listaObservacoes').html(`${OBSERVACAO}`);
+
 		$('#resumoEndereco').html(
 			`${MEU_ENDERECO.endereco}, ${MEU_ENDERECO.numero}, ${MEU_ENDERECO.bairro}`
 		);
@@ -499,6 +510,8 @@ cardapio.metodos = {
 			texto += '\n*Endereço de entrega:*';
 			texto += `\n${MEU_ENDERECO.endereco}, ${MEU_ENDERECO.numero}, ${MEU_ENDERECO.bairro}`;
 			texto += `\n${MEU_ENDERECO.cidade}-${MEU_ENDERECO.uf} / ${MEU_ENDERECO.cep} ${MEU_ENDERECO.complemento}`;
+			texto += '\n*Observações:*';
+			texto += `\n${OBSERVACAO}`;
 			texto += `\n\n*Total (com entrega): R$ ${(VALOR_CARRINHO + VALOR_ENTREGA)
 				.toFixed(2)
 				.replace('.', ',')}*`;
