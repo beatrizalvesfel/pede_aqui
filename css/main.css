@@ -85,6 +85,7 @@ b {
 
 .banner {
 	background-image: url(../img/bg.png);
+	padding: 2rem 0;
 }
 
 .banner-img {
