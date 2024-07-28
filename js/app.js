@@ -4,7 +4,7 @@ $(document).ready(function () {
 
 var cardapio = {};
 
-var HORARIO_ABERTURA_LOJA = 1;
+var HORARIO_ABERTURA_LOJA = 18;
 var HORARIO_FECHAMENTO_LOJA = 23;
 
 var MEU_CARRINHO = [];
@@ -26,8 +26,7 @@ function checkIsOpen() {
 	const hora = data.getHours();
 	const dia = data.getDay();
 	return (
-		hora >= HORARIO_ABERTURA_LOJA && hora < HORARIO_FECHAMENTO_LOJA
-		// && dia != 0
+		hora >= HORARIO_ABERTURA_LOJA && hora < HORARIO_FECHAMENTO_LOJA && dia != 0
 	);
 }
 
