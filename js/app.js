@@ -4,8 +4,8 @@ $(document).ready(function () {
 
 var cardapio = {};
 
-var horarioAbertura = 18;
-var horarioFechamento = 23;
+var HORARIO_ABERTURA_LOJA = 1;
+var HORARIO_FECHAMENTO_LOJA = 23;
 
 var MEU_CARRINHO = [];
 var MEU_ENDERECO = null;
@@ -14,27 +14,34 @@ var VALOR_CARRINHO = 0;
 
 var VALOR_ENTREGA = 0;
 
-var CELULAR_EMPRESA = '5517991234567';
+var CELULAR_EMPRESA = '5599999999999';
 
 var open = false;
 // verificar se está aberto
 function checkIsOpen() {
 	const data = new Date();
 	const hora = data.getHours();
-	return hora >= horarioAbertura && hora < horarioFechamento;
+	return hora >= HORARIO_ABERTURA_LOJA && hora < HORARIO_FECHAMENTO_LOJA;
 }
 
 const spanItem = document.getElementById('date-span');
+const spanItemCart = document.getElementById('date-span-cart');
+const closedSpan = document.getElementById('closed-span');
 const isOpen = checkIsOpen();
 
 if (isOpen) {
+	open = true;
 	spanItem.classList.remove('bg-red');
 	spanItem.classList.add('bg-green');
-	open = true;
+	closedSpan.classList.add('hidden');
 } else {
+	open = false;
 	spanItem.classList.remove('bg-green');
 	spanItem.classList.add('bg-red');
-	open = false;
+	closedSpan.classList.remove('hidden');
+
+	spanItemCart.classList.add('bg-red');
+	spanItemCart.classList.remove('hidden');
 }
 
 cardapio.eventos = {
@@ -509,17 +516,12 @@ cardapio.metodos = {
 
 					// converte a URL
 					let encode = encodeURI(texto);
-					let URL = `https://wa.me/${5575999161771}?text=${encode}`;
+					let URL = `https://wa.me/${CELULAR_EMPRESA}?text=${encode}`;
 
 					$('#btnEtapaResumo').attr('href', URL);
 				}
 			});
 		}
-	},
-
-	// carrega o botão de ligar
-	carregarBotaoLigar: () => {
-		$('#btnLigar').attr('href', `tel:${5575999161771}`);
 	},
 
 	// abre o depoimento
