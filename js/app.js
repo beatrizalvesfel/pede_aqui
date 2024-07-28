@@ -4,7 +4,7 @@ $(document).ready(function () {
 
 var cardapio = {};
 
-var HORARIO_ABERTURA_LOJA = 18;
+var HORARIO_ABERTURA_LOJA = 0;
 var HORARIO_FECHAMENTO_LOJA = 23;
 
 var MEU_CARRINHO = [];
