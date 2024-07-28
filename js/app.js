@@ -4,19 +4,39 @@ $(document).ready(function () {
 
 var cardapio = {};
 
+var horarioAbertura = 18;
+var horarioFechamento = 22;
+
 var MEU_CARRINHO = [];
 var MEU_ENDERECO = null;
 
 var VALOR_CARRINHO = 0;
+
 var VALOR_ENTREGA = 0;
 
 var CELULAR_EMPRESA = '5517991234567';
 
+// verificar se está aberto
+function checkIsOpen() {
+	const data = new Date();
+	const hora = data.getHours();
+	return hora >= horarioAbertura && hora < horarioFechamento;
+}
+
+const spanItem = document.getElementById('date-span');
+const isOpen = checkIsOpen();
+
+if (isOpen) {
+	spanItem.classList.remove('bg-red');
+	spanItem.classList.add('bg-green');
+} else {
+	spanItem.classList.remove('bg-green');
+	spanItem.classList.add('bg-red');
+}
+
 cardapio.eventos = {
 	init: () => {
 		cardapio.metodos.obterItensCardapio();
-		cardapio.metodos.carregarBotaoLigar();
-		cardapio.metodos.carregarBotaoReserva();
 	},
 };
 
@@ -24,7 +44,6 @@ cardapio.metodos = {
 	// obtem a lista de itens do cardápio
 	obterItensCardapio: (categoria = 'burgers', vermais = false) => {
 		var filtro = MENU[categoria];
-		console.log(filtro);
 
 		if (!vermais) {
 			$('#itensCardapio').html('');
@@ -206,6 +225,10 @@ cardapio.metodos = {
 	voltarEtapa: () => {
 		let etapa = $('.etapa.active').length;
 		cardapio.metodos.carregarEtapa(etapa - 1);
+		VALOR_ENTREGA = 0;
+		$('#lblValorEntrega').text(
+			`+ R$ ${VALOR_ENTREGA.toFixed(2).replace('.', ',')}`
+		);
 	},
 
 	// carrega a lista de itens do carrinho
@@ -283,7 +306,6 @@ cardapio.metodos = {
 	// carrega os valores de SubTotal, Entrega e Total
 	carregarValores: () => {
 		VALOR_CARRINHO = 0;
-
 		$('#lblSubTotal').text('R$ 0,00');
 		$('#lblValorEntrega').text('+ R$ 0,00');
 		$('#lblValorTotal').text('R$ 0,00');
@@ -297,9 +319,6 @@ cardapio.metodos = {
 				);
 				$('#lblValorEntrega').text(
 					`+ R$ ${VALOR_ENTREGA.toFixed(2).replace('.', ',')}`
-				);
-				$('#lblValorTotal').text(
-					`R$ ${(VALOR_CARRINHO + VALOR_ENTREGA).toFixed(2).replace('.', ',')}`
 				);
 			}
 		});
@@ -412,6 +431,28 @@ cardapio.metodos = {
 
 		cardapio.metodos.carregarEtapa(3);
 		cardapio.metodos.carregarResumo();
+		cardapio.metodos.deliveryPrice();
+	},
+
+	// calcula valor da entrega
+	deliveryPrice: () => {
+		VALOR_ENTREGA = 0;
+		bairro = MEU_ENDERECO.bairro;
+		if (bairro.toUpperCase() === 'CAMPO LIMPO') {
+			VALOR_ENTREGA = 12;
+			$('#lblValorEntrega').text(
+				`+ R$ ${VALOR_ENTREGA.toFixed(2).replace('.', ',')}`
+			);
+		}
+		if (bairro.toUpperCase() === 'CIDADE NOVA') {
+			VALOR_ENTREGA = 10;
+			$('#lblValorEntrega').text(
+				`+ R$ ${VALOR_ENTREGA.toFixed(2).replace('.', ',')}`
+			);
+		}
+		$('#lblValorTotal').text(
+			`R$ ${(VALOR_CARRINHO + VALOR_ENTREGA).toFixed(2).replace('.', ',')}`
+		);
 	},
 
 	// carrega a etapa de Resumo do pedido
@@ -434,7 +475,6 @@ cardapio.metodos = {
 		$('#cidadeEndereco').html(
 			`${MEU_ENDERECO.cidade}-${MEU_ENDERECO.uf} / ${MEU_ENDERECO.cep} ${MEU_ENDERECO.complemento}`
 		);
-
 		cardapio.metodos.finalizarPedido();
 	},
 

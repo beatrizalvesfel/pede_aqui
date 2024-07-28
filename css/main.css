@@ -33,16 +33,16 @@ b {
 	font-family: 'PoppinsMedium', 'Rubik', sans-serif;
 }
 
+.img-logo {
+	width: 80px;
+}
+
 .hidden {
 	display: none !important;
 }
 
 .color-primary {
 	color: var(--color-primary);
-}
-
-a.navbar-brand {
-	margin-left: -25px;
 }
 
 .nav-link {
@@ -84,8 +84,35 @@ a.navbar-brand {
 }
 
 .banner {
-	padding-top: 110px;
-	padding-bottom: 80px;
+	background-image: url(../img/bg.png);
+}
+
+.banner-img {
+	width: 10rem;
+	height: 10rem;
+	border-radius: 50%;
+	background-color: var(--color-secondary);
+	display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.banner .banner-img img {
+	width: 90%;
+	object-fit: contain;
+	padding: 0.5rem;
+}
+
+.date-span{
+	border-radius: 0.5rem;
+}
+
+.bg-green {
+	background-color: var(--color-green);
+}
+
+.bg-red {
+	background-color: var(--color-red);
 }
 
 .text-banner {
