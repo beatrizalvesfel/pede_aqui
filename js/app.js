@@ -5,7 +5,7 @@ $(document).ready(function () {
 var cardapio = {};
 
 var horarioAbertura = 18;
-var horarioFechamento = 22;
+var horarioFechamento = 23;
 
 var MEU_CARRINHO = [];
 var MEU_ENDERECO = null;
@@ -16,6 +16,7 @@ var VALOR_ENTREGA = 0;
 
 var CELULAR_EMPRESA = '5517991234567';
 
+var open = false;
 // verificar se está aberto
 function checkIsOpen() {
 	const data = new Date();
@@ -29,9 +30,11 @@ const isOpen = checkIsOpen();
 if (isOpen) {
 	spanItem.classList.remove('bg-red');
 	spanItem.classList.add('bg-green');
+	open = true;
 } else {
 	spanItem.classList.remove('bg-green');
 	spanItem.classList.add('bg-red');
+	open = false;
 }
 
 cardapio.eventos = {
@@ -180,8 +183,11 @@ cardapio.metodos = {
 
 			$('.etapa').removeClass('active');
 			$('.etapa1').addClass('active');
-
-			$('#btnEtapaPedido').removeClass('hidden');
+			if (open === true) {
+				$('#btnEtapaPedido').removeClass('hidden');
+			} else {
+				$('#btnEtapaPedido').addClass('hidden');
+			}
 			$('#btnEtapaEndereco').addClass('hidden');
 			$('#btnEtapaResumo').addClass('hidden');
 			$('#btnVoltar').addClass('hidden');
