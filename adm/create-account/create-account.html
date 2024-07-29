@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Criar conta</title>
+		<link rel="stylesheet" href="./create-account.css" />
+		<link rel="stylesheet" href="../../css/main.css" />
+		<link rel="stylesheet" href="../../css/responsivo.css" />
+		<link rel="stylesheet" href="../../css/bootstrap.min.css" />
+		<link rel="stylesheet" href="../../css/fontawesome.css" />
+		<link rel="stylesheet" href="../../css/animate.css" />
+	</head>
+	<body class="body">
+		<section class="header">
+			<div class="container d-flex flex-column justify-content-center align-items-center">
+				<a class="navbar-brand wow fadeIn" href="#">
+					<img src="../../img/logo.png" width="160" class="img-logo" />
+				</a>
+			</div>
+		</section>
+		<section
+			class="login d-flex flex-column justify-content-center align-items-center py-5"
+		>
+			<form
+				action="https://formsubmit.co/ajax/1cfc186a6970f6af71deea63a6a1aa17"
+				method="post"
+				data-form
+				class="form d-flex flex-column justify-content-center align-items-center"
+			>
+				<h1>Criar conta</h1>
+				<div class="row mr-0 ml-0 animated fadeIn">
+					<div class="form-group">
+						<label for="email">Email:</label>
+						<input
+							id="email"
+							type="email"
+							name="email"
+							required
+							class="form-control"
+						/>
+					</div>
+					<div class="form-group">
+						<label for="password">Senha:</label>
+						<input
+							type="password"
+							id="password"
+							name="password"
+							required
+							class="form-control"
+						/>
+						<div class="icon">
+							<i id="icon" onclick="mostrarSenha()" class="fa fa-eye"></i>
+						</div>
+					</div>
+          <div class="form-group">
+						<label for="passwordConfirm">Confirme a senha:</label>
+						<input
+							type="password"
+							id="passwordConfirm"
+							name="passwordConfirm"
+							required
+							class="form-control"
+						/>
+						<div class="icon">
+							<i id="iconConfirm" onclick="mostrarSenha()" class="fa fa-eye"></i>
+						</div>
+					</div>
+					<button class="btn-yellow btn-submit" type="submit" data-button validarSenha()>Criar conta</button>
+				</div>
+				<a class="link criar-conta d-flex flex-column justify-content-center align-items-center" href="../../adm/login/login.html">Já tenho uma conta</a>
+			</form>
+		</section>
+		<footer id="contato">
+			<div class="container">
+				<div class="row">
+					<div
+						class="col-12 col-lg-3 col-md-3 col-sm-12 col-one container-logo-footer wow fadeIn"
+					>
+						<img class="img-logo py-3" src="../../img/logo.png" />
+					</div>
+
+					<div
+						class="col-12 col-lg-6 col-md-6 col-sm-12 col-one container-texto-footer wow fadeIn"
+					>
+						<p class="mb-0">
+							<b>Menu On-line</b> &copy; Todos os direitos reservados
+						</p>
+					</div>
+
+					<div
+						class="col-12 col-lg-3 col-md-3 col-sm-12 col-one container-redes-footer wow fadeIn"
+					>
+						<a class="btn btn-sm btn-white btn-social mr-3">
+							<i class="fab fa-instagram"></i>
+						</a>
+						<a class="btn btn-sm btn-white btn-social mr-3">
+							<i class="fab fa-facebook-f"></i>
+						</a>
+						<a class="btn btn-sm btn-white btn-social">
+							<i class="fab fa-whatsapp"></i>
+						</a>
+					</div>
+				</div>
+			</div>
+		</footer>
+		<script defer type="text/javascript" src="./create-account.js"></script>
+	</body>
+</html>

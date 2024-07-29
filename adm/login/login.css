@@ -1,0 +1,95 @@
+@font-face {
+	font-family: 'PoppinsMedium';
+	src: url('../fonts/Poppins-Medium.otf');
+}
+
+@font-face {
+	font-family: 'PoppinsRegular';
+	src: url('../fonts/Poppins-Regular.otf');
+}
+
+:root {
+	--color-background: #fffdf7;
+	--color-black: #212121;
+	--color-black-heavy: #000000;
+	--color-text: #4f4f4f;
+	--color-text-out: #90908e;
+	--color-primary: #ffbf00;
+	--color-secondary: #fff2cc;
+	--color-white: #ffffff;
+	--color-red: #e74c3c;
+	--color-green: #2ecc71;
+	--color-separate: #cccccc;
+}
+
+html,
+body {
+	font-family: 'PoppinsRegular', 'Rubik', sans-serif;
+	background-color: var(--color-background);
+	color: var(--color-text);
+}
+
+b {
+	font-family: 'PoppinsMedium', 'Rubik', sans-serif;
+}
+
+form {
+	width: 450px;
+	padding: 4rem 2rem;
+	background-color: var(--color-white);
+}
+
+.form-group {
+	width: 100%;
+	position: relative;
+}
+
+.btn-login {
+	width: 100%;
+}
+
+.btn-login:disabled {
+	cursor: not-allowed;
+	background-color: var(--color-text-out);
+}
+
+.link {
+	text-decoration: none;
+	color: var(--color-primary);
+	padding-bottom: 0.5rem;
+	width: 100%;
+}
+
+.link:hover {
+	color: var(--color-black);
+}
+
+.criar-conta {
+	padding-top: 0.5rem;
+}
+
+.login {
+	background-color: var(--color-primary);
+  height: 100%;
+}
+
+.body {
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.icon {
+	position: absolute;
+	top: 40px;
+	left: 90%;
+	cursor: pointer;
+}
+
+@media (max-width: 767px) {
+  form {
+    width: 90%!important;
+		padding: 2rem 1rem;
+  }
+}
